@@ -21,7 +21,7 @@ jobs:
       - name: 检出博客仓库
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.OBSIDIAN_TOKEN }}
           fetch-depth: 0
       
       - name: 检出 Obsidian 仓库

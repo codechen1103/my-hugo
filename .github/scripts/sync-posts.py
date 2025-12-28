@@ -114,15 +114,15 @@ def process_markdown_file(file_path, relative_path):
         # 转换为 Hugo 格式
         hugo_content = convert_to_hugo_format(body, frontmatter, fmt)
         
-        # 确定目标路径
-        target_path = HUGO_CONTENT_PATH / relative_path
+        # 确定目标路径 - 只使用文件名，不保留目录结构
+        target_path = HUGO_CONTENT_PATH / relative_path.name
         target_path.parent.mkdir(parents=True, exist_ok=True)
         
         # 写入文件
         with open(target_path, 'w', encoding='utf-8') as f:
             f.write(hugo_content)
         
-        return True, f"✅ 同步成功: {relative_path}"
+        return True, f"✅ 同步成功: {relative_path.name}"
         
     except Exception as e:
         return False, f"❌ 处理失败 {relative_path}: {str(e)}"
