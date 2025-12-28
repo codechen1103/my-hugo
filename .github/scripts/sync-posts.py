@@ -74,11 +74,16 @@ def convert_to_hugo_format(content, frontmatter, original_format):
         frontmatter = {}
     
     # 确保必要的字段存在
-    if 'date' not in frontmatter:
+    if 'date' not in frontmatter or frontmatter.get('date') in ['YYYY-MM-DDTHH:mm:ssZ', '', None]:
         frontmatter['date'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S+08:00')
     
     if 'draft' not in frontmatter:
         frontmatter['draft'] = False
+    
+    # 确保有标题
+    if 'title' not in frontmatter or not frontmatter.get('title'):
+        # 从文件名生成标题（在调用处传入）
+        frontmatter['title'] = 'Untitled'
     
     # 移除 share 字段（这是 Obsidian 特有的）
     frontmatter.pop('share', None)
@@ -148,6 +153,13 @@ def process_markdown_file(file_path, relative_path):
         # 检查是否应该分享
         if not should_share(frontmatter):
             return False, f"跳过（未标记为分享）: {relative_path}"
+        
+        # 如果没有标题，从文件名生成
+        if not frontmatter or 'title' not in frontmatter or not frontmatter.get('title'):
+            if not frontmatter:
+                frontmatter = {}
+            # 从文件名生成标题（去掉 .md 扩展名）
+            frontmatter['title'] = relative_path.stem
         
         # 转换为 Hugo 格式
         hugo_content = convert_to_hugo_format(body, frontmatter, fmt)

@@ -11,8 +11,15 @@
     <loc>http://localhost:1313/posts/my-first-post/</loc>
     <lastmod>2025-12-28T23:44:25+08:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/posts/%E5%A6%82%E4%BD%95%E5%9C%A8vitepress%E9%87%8C%E5%AE%9E%E7%8E%B0md%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90%E6%98%A0%E5%B0%84/</loc>
+    <lastmod>2025-12-28T16:32:46+08:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
+    <loc>http://localhost:1313/posts/729/</loc>
+  </url><url>
     <loc>http://localhost:1313/tags/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/test/</loc>
   </url>
 </urlset>

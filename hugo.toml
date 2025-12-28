@@ -2,3 +2,36 @@ baseURL = 'https://example.org/'
 languageCode = 'zh-cn'
 title = '我的Hugo网站'
 theme = 'ananke'
+
+# 分页设置
+paginate = 10
+
+# 主页显示文章列表
+[params]
+  # 在首页显示最近的文章
+  mainSections = ['posts']
+  # 显示文章摘要
+  show_reading_time = true
+  # 显示文章日期
+  show_date = true
+  
+# 菜单配置
+[[menu.main]]
+  name = '首页'
+  url = '/'
+  weight = 1
+
+[[menu.main]]
+  name = '文章'
+  url = '/posts/'
+  weight = 2
+
+[[menu.main]]
+  name = '标签'
+  url = '/tags/'
+  weight = 3
+
+[[menu.main]]
+  name = '分类'
+  url = '/categories/'
+  weight = 4
