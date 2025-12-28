@@ -83,18 +83,56 @@ def convert_to_hugo_format(content, frontmatter, original_format):
     # 移除 share 字段（这是 Obsidian 特有的）
     frontmatter.pop('share', None)
     
+    # 处理嵌套字段（如 cover.image）
+    processed_frontmatter = {}
+    nested_fields = {}
+    
+    for key, value in frontmatter.items():
+        if '.' in key:
+            # 处理嵌套字段，如 cover.image
+            parts = key.split('.', 1)
+            parent_key = parts[0]
+            child_key = parts[1]
+            
+            if parent_key not in nested_fields:
+                nested_fields[parent_key] = {}
+            nested_fields[parent_key][child_key] = value
+        else:
+            processed_frontmatter[key] = value
+    
     # 构建 Hugo 格式的 front matter（使用 TOML 格式）
     hugo_frontmatter = "+++\n"
-    for key, value in frontmatter.items():
+    
+    # 先写入普通字段
+    for key, value in processed_frontmatter.items():
         if isinstance(value, bool):
             hugo_frontmatter += f"{key} = {str(value).lower()}\n"
         elif isinstance(value, (int, float)):
             hugo_frontmatter += f"{key} = {value}\n"
         elif isinstance(value, list):
-            hugo_frontmatter += f"{key} = {value}\n"
-        else:
-            # 字符串需要加引号
-            hugo_frontmatter += f"{key} = '{value}'\n"
+            # 格式化列表
+            list_str = str(value).replace("'", '"')
+            hugo_frontmatter += f"{key} = {list_str}\n"
+        elif value and value != 'None':
+            # 字符串需要加引号，跳过空值和 'None'
+            escaped_value = str(value).replace("'", "\\'")
+            hugo_frontmatter += f"{key} = '{escaped_value}'\n"
+    
+    # 写入嵌套字段（使用 TOML 表格语法）
+    for parent_key, children in nested_fields.items():
+        hugo_frontmatter += f"\n[{parent_key}]\n"
+        for child_key, value in children.items():
+            if isinstance(value, bool):
+                hugo_frontmatter += f"{child_key} = {str(value).lower()}\n"
+            elif isinstance(value, (int, float)):
+                hugo_frontmatter += f"{child_key} = {value}\n"
+            elif isinstance(value, list):
+                list_str = str(value).replace("'", '"')
+                hugo_frontmatter += f"{child_key} = {list_str}\n"
+            elif value and value != 'None':
+                escaped_value = str(value).replace("'", "\\'")
+                hugo_frontmatter += f"{child_key} = '{escaped_value}'\n"
+    
     hugo_frontmatter += "+++\n"
     
     return hugo_frontmatter + content
