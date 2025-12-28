@@ -1,0 +1,66 @@
+name: 同步 Obsidian 文章
+
+on:
+  # 手动触发
+  workflow_dispatch:
+  # 定时触发（每天凌晨2点）
+  schedule:
+    - cron: '0 18 * * *'  # UTC 18:00 = 北京时间 02:00
+  # 当有推送到 main 分支时触发（可选）
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/sync-obsidian.yml'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出博客仓库
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: 检出 Obsidian 仓库
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.OBSIDIAN_REPO }}  # 格式: username/repo-name
+          token: ${{ secrets.OBSIDIAN_TOKEN }}
+          path: obsidian-vault
+          fetch-depth: 1
+      
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: 安装依赖
+        run: |
+          pip install pyyaml
+      
+      - name: 同步文章
+        run: |
+          python .github/scripts/sync-posts.py
+      
+      - name: 检查是否有更改
+        id: check_changes
+        run: |
+          git diff --quiet content/posts/ || echo "has_changes=true" >> $GITHUB_OUTPUT
+      
+      - name: 提交更改
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add content/posts/
+          git commit -m "🔄 自动同步 Obsidian 文章 [$(date +'%Y-%m-%d %H:%M:%S')]"
+          git push
+      
+      - name: 同步完成通知
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          echo "✅ 文章同步完成！"
+          echo "📝 已同步的文章数量: $(git diff HEAD~1 --name-only content/posts/ | wc -l)"

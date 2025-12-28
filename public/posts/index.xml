@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 我的Hugo网站</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on 我的Hugo网站</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 28 Dec 2025 23:44:25 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我的第一篇文章</title>
+      <link>http://localhost:1313/posts/my-first-post/</link>
+      <pubDate>Sun, 28 Dec 2025 23:44:25 +0800</pubDate>
+      <guid>http://localhost:1313/posts/my-first-post/</guid>
+      <description>&lt;h2 id=&#34;欢迎来到我的hugo博客&#34;&gt;欢迎来到我的Hugo博客&lt;/h2&gt;&#xA;&lt;p&gt;这是我使用Hugo创建的第一篇文章。Hugo是一个快速、现代的静态网站生成器。&lt;/p&gt;&#xA;&lt;h3 id=&#34;为什么选择hugo&#34;&gt;为什么选择Hugo？&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;速度快&lt;/strong&gt;：Hugo的构建速度非常快&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;易于使用&lt;/strong&gt;：简单的命令行工具&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;灵活性强&lt;/strong&gt;：支持多种主题和自定义&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Markdown支持&lt;/strong&gt;：使用Markdown编写内容&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;开始使用&#34;&gt;开始使用&lt;/h3&gt;&#xA;&lt;p&gt;使用Hugo非常简单，只需要几个命令：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo new site mysite&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo new posts/my-first-post.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo server&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;希望你喜欢这个博客！&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
