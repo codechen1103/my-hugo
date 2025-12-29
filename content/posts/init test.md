@@ -1,5 +1,5 @@
 +++
-date = 'YYYY-MM-DDTHH:mm:ssZ'
+date = '2025-12-28T18:18:26+08:00'
 tags = ["test"]
 title = 'init test'
 slug = 729
