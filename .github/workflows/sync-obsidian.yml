@@ -55,6 +55,16 @@ jobs:
           hugo-version: 'latest'
           extended: true
       
+      - name: 下载 Ananke 主题
+        run: |
+          if [ ! -d "themes/ananke" ] || [ -z "$(ls -A themes/ananke)" ]; then
+            echo "📥 下载 Ananke 主题..."
+            rm -rf themes/ananke
+            git clone https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
+          else
+            echo "✅ 主题已存在"
+          fi
+      
       - name: 构建 Hugo 站点
         run: hugo --minify
       
