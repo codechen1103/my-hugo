@@ -26,6 +26,7 @@ jobs:
         with:
           token: ${{ secrets.OBSIDIAN_TOKEN }}
           fetch-depth: 0
+          submodules: true
       
       - name: 检出 Obsidian 仓库
         uses: actions/checkout@v4

@@ -4,7 +4,8 @@ title = '我的Hugo网站'
 theme = 'ananke'
 
 # 分页设置
-paginate = 10
+[pagination]
+  pagerSize = 10
 
 # 主页显示文章列表
 [params]
