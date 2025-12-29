@@ -40,13 +40,22 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: 安装依赖
+      - name: 安装 Python 依赖
         run: |
           pip install pyyaml
       
       - name: 同步文章
         run: |
           python .github/scripts/sync-posts.py
+      
+      - name: 设置 Hugo 环境
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+      
+      - name: 构建 Hugo 站点
+        run: hugo --minify
       
       - name: 检查是否有更改
         id: check_changes
@@ -65,8 +74,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add content/posts/
-          git commit -m "🔄 自动同步 Obsidian 文章 [$(date +'%Y-%m-%d %H:%M:%S')]"
+          git add content/posts/ public/
+          git commit -m "🔄 自动同步 Obsidian 文章并构建站点 [$(date +'%Y-%m-%d %H:%M:%S')]"
           git push
       
       - name: 同步完成通知
