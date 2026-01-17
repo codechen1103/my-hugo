@@ -1,6 +1,6 @@
 +++
 title = '如何在vitepress里实现md自定义语法解析映射？'
-date = '2026-01-16T18:21:10+08:00'
+date = '2026-01-17T18:18:16+08:00'
 draft = false
 +++
 ![Pasted image 20251228172816.png](/images/Pasted image 20251228172816.png)
